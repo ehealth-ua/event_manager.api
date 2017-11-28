@@ -1,7 +1,11 @@
-defmodule EventManager.Events.Event do
+defmodule EventManagerApi.Events.Event do
   @moduledoc false
 
   use Ecto.Schema
+
+  @type_change_status "StatusChangeEvent"
+
+  def type(:change_status), do: @type_change_status
 
   schema "events" do
     field :event_type, :string

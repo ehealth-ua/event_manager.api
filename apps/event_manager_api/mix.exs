@@ -11,6 +11,7 @@ defmodule EventManagerApi.MixProject do
       lockfile: "../../mix.lock",
       elixir: "~> 1.6-dev",
       start_permanent: Mix.env() == :prod,
+      elixirc_paths: elixirc_paths(Mix.env),
       deps: deps(),
       aliases: aliases(),
     ]
@@ -24,6 +25,10 @@ defmodule EventManagerApi.MixProject do
     ]
   end
 
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support", "test/factories"]
+  defp elixirc_paths(_),     do: ["lib"]
+
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
@@ -32,6 +37,7 @@ defmodule EventManagerApi.MixProject do
       {:scrivener_ecto, "~> 1.2"},
       {:ecto_trail, "~> 0.2.3"},
       {:ecto_logger_json, "~> 0.1"},
+      {:ex_machina, "~> 2.1", only: :test},
     ]
   end
 
@@ -44,7 +50,7 @@ defmodule EventManagerApi.MixProject do
       ],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "test": [
-        "ecto.create --quiet",
+        "ecto.create",
         "ecto.migrate",
         "test"
       ]

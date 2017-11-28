@@ -21,6 +21,7 @@ defmodule EventManagerWeb.ConnCase do
       use Phoenix.ConnTest
 
       import EventManagerWeb.Router.Helpers
+      import EventManagerApi.Factory
 
       # The default endpoint for testing
       @endpoint EventManagerWeb.Endpoint
@@ -28,8 +29,9 @@ defmodule EventManagerWeb.ConnCase do
   end
 
   setup tags do
-
     _ = tags
+
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(EventManagerApi.Repo)
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end

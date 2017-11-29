@@ -20,8 +20,9 @@ use Mix.Config
 # configured to run both http and https servers on
 # different ports.
 config :event_manager_web, EventManagerWeb.Endpoint,
+  server: true,
   http: [port: {:system, "PORT", 4000}],
-  debug_errors: false,
+  debug_errors: true,
   code_reloader: true,
   check_origin: false,
   watchers: []

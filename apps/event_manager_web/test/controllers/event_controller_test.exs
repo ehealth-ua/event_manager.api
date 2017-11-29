@@ -57,4 +57,22 @@ defmodule EventManagerWeb.EventControllerTest do
       assert resp["paging"]["page_number"] == 2
     end
   end
+
+  describe "show by id" do
+    test "success get by id", %{conn: conn} do
+      event = insert(:event)
+      conn = get conn, event_path(conn, :show, event.id)
+      resp = json_response(conn, 200)
+      assert event.id == resp["data"]["id"]
+    end
+
+    test "fail get by id", %{conn: conn} do
+      assert_raise Ecto.NoResultsError, fn ->
+        get conn, event_path(conn, :show, "1")
+      end
+
+      conn = get conn, event_path(conn, :show, "invalid")
+      assert json_response(conn, 404)
+    end
+  end
 end

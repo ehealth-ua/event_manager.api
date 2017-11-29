@@ -18,6 +18,14 @@ defmodule EventManagerApi.Events do
     end
   end
 
+  def get_by_id!(id) do
+    with {:ok, _} <- Ecto.Type.cast(:id, id) do
+      Repo.get!(Event, id)
+    else
+      _ -> nil
+    end
+  end
+
   defp changeset(%Search{} = search, params) do
     {search, %{
       date: :date,

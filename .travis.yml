@@ -54,7 +54,7 @@ script:
   # Build Docker container
   - ./bin/ci/rel/build-container.sh || travis_terminate 1
   # Initialize DB for Docker container
-  - MIX_ENV=dev mix ecto.setup
+  - (cd apps/event_manager_api && MIX_ENV=dev mix ecto.setup)
   # Run Docker container
   - sudo ./bin/ci/release/start-container.sh
   - sudo ./bin/ci/release/check-container.sh || travis_terminate

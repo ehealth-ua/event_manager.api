@@ -1,4 +1,6 @@
 defmodule EventManagerWeb.Endpoint do
+  @moduledoc false
+
   use Phoenix.Endpoint, otp_app: :event_manager_web
   alias Confex.Resolver
 

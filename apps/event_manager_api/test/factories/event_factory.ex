@@ -1,4 +1,6 @@
 defmodule EventManagerApi.EventFactory do
+  @moduledoc false
+
   defmacro __using__(_opts) do
     quote do
       import Ecto.UUID, only: [generate: 0]

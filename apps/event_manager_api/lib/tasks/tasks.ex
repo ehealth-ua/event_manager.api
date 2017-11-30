@@ -30,7 +30,7 @@ defmodule EventManagerApi.ReleaseTasks do
 
   def migrate, do: Enum.each(repos(), &run_migrations_for/1)
 
-  def priv_dir(app), do: "#{:code.priv_dir(app)}"
+  def priv_dir(app), do: to_string(:code.priv_dir(app))
 
   defp run_migrations_for(repo) do
     app = Keyword.get(repo.config, :otp_app)

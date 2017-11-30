@@ -1,4 +1,6 @@
 defmodule EventManagerApi.ReleaseTasks do
+  alias Ecto.Migrator
+
   @start_apps [
     :postgrex,
     :ecto,
@@ -34,7 +36,7 @@ defmodule EventManagerApi.ReleaseTasks do
 
     migration_source = migrations_path(app)
     IO.puts "Migrations path: #{migration_source}"
-    Ecto.Migrator.run(repo, migration_source, :up, all: true)
+    Migrator.run(repo, migration_source, :up, all: true)
   end
 
   defp migrations_path(app), do: Path.join([priv_dir(app), "repo", "migrations"])

@@ -19,6 +19,8 @@ defmodule EventManagerWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
+      alias Phoenix.ConnTest, as: PhoenixConnTest
+      alias Ecto.Adapters.SQL.Sandbox
 
       import EventManagerWeb.Router.Helpers
       import EventManagerApi.Factory
@@ -31,8 +33,8 @@ defmodule EventManagerWeb.ConnCase do
   setup tags do
     _ = tags
 
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(EventManagerApi.Repo)
+    :ok = Sandbox.checkout(EventManagerApi.Repo)
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    {:ok, conn: PhoenixConnTest.build_conn()}
   end
 end

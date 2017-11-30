@@ -14,13 +14,13 @@ defmodule EventManagerWeb.ConnCase do
   """
 
   use ExUnit.CaseTemplate
+  alias Phoenix.ConnTest, as: PhoenixConnTest
+  alias Ecto.Adapters.SQL.Sandbox
 
   using do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias Phoenix.ConnTest, as: PhoenixConnTest
-      alias Ecto.Adapters.SQL.Sandbox
 
       import EventManagerWeb.Router.Helpers
       import EventManagerApi.Factory

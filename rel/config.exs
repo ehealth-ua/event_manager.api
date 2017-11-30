@@ -36,7 +36,7 @@ end
 # when running `mix release`, the first release in the file
 # will be used by default
 
-release :event_manager do
+release :event_manager_web do
   set version: current_version(:event_manager_web)
   set applications: [
     :runtime_tools,

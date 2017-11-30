@@ -1,5 +1,5 @@
 #!/bin/sh
-APP_NAME="event_manager"
+APP_NAME="event_manager_web"
 
 if [ "${DB_MIGRATE}" == "true" ]; then
   echo "[WARNING] Migrating database!"

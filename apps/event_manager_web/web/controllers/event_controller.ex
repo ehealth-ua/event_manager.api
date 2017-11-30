@@ -1,4 +1,6 @@
 defmodule EventManagerWeb.EventController do
+  @moduledoc false
+
   use EventManagerWeb.Web, :controller
 
   alias EventManagerApi.Events

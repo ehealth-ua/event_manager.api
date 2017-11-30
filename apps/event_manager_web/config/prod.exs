@@ -62,7 +62,3 @@ config :logger, level: :error, handle_otp_reports: true
 #
 #     config :event_manager_web, EventManagerWeb.Endpoint, server: true
 #
-
-# Finally import the config/prod.secret.exs
-# which should be versioned separately.
-import_config "prod.secret.exs"

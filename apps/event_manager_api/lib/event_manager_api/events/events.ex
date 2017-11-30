@@ -6,6 +6,7 @@ defmodule EventManagerApi.Events do
   alias EventManagerApi.Repo
   alias EventManagerApi.Events.Event
   alias EventManagerApi.Events.Search
+  alias Ecto.Type
 
   def list(params) do
     with %Ecto.Changeset{valid?: true, changes: changes} <- changeset(%Search{}, params) do
@@ -19,7 +20,7 @@ defmodule EventManagerApi.Events do
   end
 
   def get_by_id!(id) do
-    with {:ok, _} <- Ecto.Type.cast(:id, id) do
+    with {:ok, _} <- Type.cast(:id, id) do
       Repo.get!(Event, id)
     else
       _ -> nil

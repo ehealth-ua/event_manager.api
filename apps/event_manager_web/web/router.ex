@@ -1,4 +1,6 @@
 defmodule EventManagerWeb.Router do
+  @moduledoc false
+
   use EventManagerWeb.Web, :router
 
   pipeline :api do

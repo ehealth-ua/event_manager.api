@@ -14,6 +14,8 @@ defmodule EventManagerWeb.ConnCase do
   """
 
   use ExUnit.CaseTemplate
+  alias Phoenix.ConnTest, as: PhoenixConnTest
+  alias Ecto.Adapters.SQL.Sandbox
 
   using do
     quote do
@@ -31,8 +33,8 @@ defmodule EventManagerWeb.ConnCase do
   setup tags do
     _ = tags
 
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(EventManagerApi.Repo)
+    :ok = Sandbox.checkout(EventManagerApi.Repo)
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    {:ok, conn: PhoenixConnTest.build_conn()}
   end
 end

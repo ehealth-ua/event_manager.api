@@ -7,6 +7,9 @@ services:
   - postgresql
 addons:
   postgresql: "9.6"
+  apt:
+    packages:
+      - docker-ce
 elixir:
   - 1.5.2
 otp_release:
@@ -24,8 +27,8 @@ env:
     - MAIN_BRANCHES="master develop staging" # Branches on which you want version to be incremented
     - RELEASE_BRANCH="master"
     # Docker and GitHub credentials
-    - secure: "wYHL73PB6QlRXcxuh+ZZx5dn6xlRxDsFQSJgdecPaD+epY3PFe9OyHwLfWL9wBNqcd1Iy+6MeqBwQ/E6hBU0tl9Z38dGxT1DMSHebm7fbqZDxVE7T81XgCYtnL3jb8+W3OxKNHl/cArY3E0B7zF0X+euaIhd4BzoaJ9lTBMT0Gxs1AqbKsPOtkqK4EvtJgN9BLS+ppRLFkreyWTiX6VniEYuOVpjotIcWWUmUl/A2fao2DTVJmz8EIVYbB6EnUAhLvzF+sxOV1Q7AKqZthET06OzCtR0cbiMNU9igjzepX5WkWMTx4G24UJ7pHF69e5At/nE8f/CwBFyMyL3LGANXTvVCnVXdjwnorrOmwtZqWgxmMyJFgWGuoKk2Av+yZU/Y5YUGCq1yrSsUgxgxrwduIKDClMsWCKymvixdghhrqvKHEPrzoYHCPEcQmVmWIXPrqxzxgZJRiFNMnbFyIeCRWS/YHtoSsjxssWOwsFzS3SXfJ4U3VkEk04Y1MO7gEMVG6e90rj9I44VGw10IQNHQr1neoE+bh45MUPkkV2T0qJuWvC6T8PwE+49Ho4rFm3GyCWTpT5gUSCKzODzHe3Xbelh2lqlIQzNVBIDPpwL6pyMniIqmfY0X+KfdYQa2Ga5sGrxFB5sBQKpZ/nzPpO7fgkxybeObr97MFNE6pmyFDo="
-    - secure: "VEi4VQNWsL2V04+sqRWUMw8yl7zUDzJ9+Kx8FNaJjxYR+2LA3gRiqw+U/sngFaj5fY7C3lBRhNCQKWXN6A0V1BHjHlpQVJYk3NWcMTTR1XsuSmIrPoMP0Gp741knSvJXcxTIAr9iTZt1mVzUhOxfkQOPWmqvQ5tm5g9FyJzignFki+4uSsB/zO5ziTrVy7/BhlVsAXLSXflPHqjlPVU3wp9nyngtFTJl2zCmCv0OK19RUGhQZKkk/mj7rF2t1KNlbVafMPBDXQReBLi8iuRYyGr4g85wLiljAKX2h8iuI5pkivKO/Bj5sgjenT3VVflrwEphA2DBBZiwUwVONJ0hJybM+7pqYvAbvQMvxNjR9/1hqBtGOjtWhqY0em2mP1eG5bTFOEGyA2yn1b0jMKkR4NauDmoLzPhAYRmon8PyhyuN7gO5ICP5crBe0XEDbkHrMSRfzc7ntqDt3hE9EvLNbWtBpwy5PNuESFc1aV18ZCXgKsXx/xmK2qYDWr5EFR4T7SJV6SXkB5mJQ8CzbCDXERRzJK6fmvus0mPFWdlkuZELAu2wJ0U/XNUAC54HBJ/tNx2NFRMHHvwORydrgZA/l6pfKwLvOga6M/Q6it9dQHEbJe1gt0FD6UbKAg9itR5fXzA8hqDDDRT5OnJQmMNen64YKvvniYNr9x9BKznxpjI="
+    - secure: "MgGKDY0805n/sq1kIUxaK8T5YG4jucI5JDPIl/UXVwqDqK8kCZMkPCUN2GPDl01cLdqrtCESVLLxY7Z3N7iayVW0SsxlbhZuI0+u6Ld+NOP5v6AheyNhDhowV2dCURItzszddEtKmCDGsR635l5LMb1SL4RFQNyUJtyyth3Z5j/pEV3rYN3ZwgWZByReNzNXypfOCYUmgeYqqR1lRO/I1/1VPTxIaTmn5AT5rI+PEY43c9+PLlPagtpM3WfYB9ATelfwo7QUrfd0eUliJhg2qi4hoZnT3c0Zc2FRRkDKP7/OUCDqL3w7ByCZnbvtPV4Hb6ogK0QqpQ2buOdl7m1sRWKJTvRAWmmIGKtPmbnDt8JIEov70sp0amhsS5PqVVTZu1Q7ZV6wVK9snNpjuDt1wkuwSBQBEokJTUZcs8qeHjomjPjkDJktzwhhWWUmhQf8A+SxGBOgvsr7D1oCjT1NE7VQ7j+wbuK4Kf8sfhlDp8USbEokrdMLQu9ZqbTx5TWbXZxx/wSyfyXJ5UXqz6lSyGMTGcVDhSO2vGS0YJphS+qM26SeILeBxodmfZQf+xZJhrqgo4L7P0yh98v+3bnCGAPPuTmH1+dgrNSdk3eVVjyVLF4ILjnlI+s/g5+F2824sxPsrf/2yam2YJ478vMXBLGYmATifWWli5o9dt9eyuM="
+    - secure: "Mj7aK7zMhdrBM/nOXSSjkgLrU1M42Ya88Bp05g+vlawa4/rr4BWZWX/4Hs2VY/+t/HS3psDhqO+3WXhcKSk6yA8k+pfRjuuxmlvIkUbJlXcY8QuLNCz/Ycyq1FdrL9f38hvp1/OZvvwCxMkoIJ41jzTO5++4QMn6+hgQVxWJLFcMc45cNEZxwyTvAWNNZFGqdf7d01gySfjXr2ycow9DV6ZhhhbNV3XtjVcBJvLefYh0B2SucwfcYOy7mw+DtilREKtz3g1+KUVhm6PtFaRZG2qotUWXgcpQxn+iV8DF89G6SrqoKsabkP+gXq4AcyOalaWGPfpk1OeVYabbtzr3eIpMnH8sGVQHB+vpMHP/++K7vJMvZs5E8zKFdUwPQUHULPDqKqFi4qCW3hP7bSVH8pnAOd2VC06uTDcLyHmNVTizvNVyLQB1wk5/NCaKJQHnP3fMRJd4a+/sEBBVF7LyuOki/v0OuxWX0p4BHwHJ7/L7CdUOZDjAXrVOJn+mq5duaCuLDATOzw6VRxzBkNvlyhfL+cpXJgIXhP6KZ3ZRCzEOL8iurOyB/5I0hyuQ7ObUmobY/VL3obUho7fl49JO47vTD8lGgPU9BWooUnavOzXES5sdzopGepO96lT9vy7jad70sSLXikSIw50p7o15ZTImsPRlEr73Qg2RZKKp/wo="
 branches:
   except:
     - /[0-9]*\.[0-9]*\.[0-9]*/
@@ -49,13 +52,13 @@ script:
   # Run all tests except pending ones
   - ./bin/mix_tests.sh || travis_terminate 1
   # Build Docker container
-  - ./bin/ci/release/build-container.sh || travis_terminate 1
+  - ./bin/ci/rel/build-container.sh || travis_terminate 1
   # Initialize DB for Docker container
-  - MIX_ENV=dev mix ecto.setup
+  - (cd apps/event_manager_api && MIX_ENV=dev mix ecto.setup)
   # Run Docker container
   - sudo ./bin/ci/release/start-container.sh
   - sudo ./bin/ci/release/check-container.sh || travis_terminate
   # Submit Docker container to Docker Hub and create GitHub Release by pushing tag with changelog
-#   - ./bin/ci/release/push-changes.sh || travis_terminate 1
+  - ./bin/ci/rel/push-changes.sh || travis_terminate 1
   # - openssl aes-256-cbc -K $encrypted_c996ec964e08_key -iv $encrypted_c996ec964e08_iv -in eHealth-8110bd102a69.json.enc -out eHealth-8110bd102a69.json -d
   # - sudo ./bin/deploy.sh || travis_terminate 1

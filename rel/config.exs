@@ -2,7 +2,8 @@
 # They can then be used by adding `plugin MyPlugin` to
 # either an environment, or release definition, where
 # `MyPlugin` is the name of the plugin module.
-Path.join(["rel", "plugins", "*.exs"])
+["rel", "plugins", "*.exs"]
+|> Path.join()
 |> Path.wildcard()
 |> Enum.map(&Code.eval_file(&1))
 
@@ -36,7 +37,7 @@ end
 # when running `mix release`, the first release in the file
 # will be used by default
 
-release :event_manager do
+release :event_manager_web do
   set version: current_version(:event_manager_web)
   set applications: [
     :runtime_tools,

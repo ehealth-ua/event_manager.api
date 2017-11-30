@@ -1,4 +1,6 @@
 defmodule EventManagerWeb do
+  @moduledoc false
+
   use Application
   alias EventManagerWeb.Endpoint
 

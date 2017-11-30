@@ -1,4 +1,6 @@
 defmodule EventManagerApi.ReleaseTasks do
+  @moduledoc false
+
   alias Ecto.Migrator
 
   @start_apps [

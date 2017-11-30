@@ -35,11 +35,13 @@ defmodule EventManagerApi.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:confex, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 2.1"},
       {:scrivener_ecto, "~> 1.2"},
       {:ecto_trail, "~> 0.2.3"},
       {:ecto_logger_json, "~> 0.1"},
+      {:quantum, "~> 2.2"},
       {:ex_machina, "~> 2.1", only: :test},
     ]
   end

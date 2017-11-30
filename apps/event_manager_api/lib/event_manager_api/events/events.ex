@@ -27,6 +27,27 @@ defmodule EventManagerApi.Events do
     end
   end
 
+  def delete_events(max_events, expiration) do
+    event =
+      Event
+      |> order_by([e], desc: e.id)
+      |> offset(^max_events)
+      |> limit(1)
+      |> Repo.one
+
+    unless is_nil(event) do
+      event_id = event.id
+      Event
+      |> where([e], e.id <= ^event_id)
+      |> Repo.delete_all
+    end
+
+    date = Date.utc_today() |> Date.add(-expiration)
+    Event
+    |> where([e], fragment("?::date <= ?", e.inserted_at, ^date))
+    |> Repo.delete_all
+  end
+
   defp changeset(%Search{} = search, params) do
     {search, %{
       date: :date,

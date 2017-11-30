@@ -24,6 +24,11 @@ config :event_manager_api, ecto_repos: [EventManagerApi.Repo]
 config :ecto_trail,
   table_name: "audit_log"
 
+config :event_manager_api, EventManagerApi.Scheduler,
+  events_termination: {:system, :string, "EVENTS_TERMINATION_SCHEDULE", "* 0-4 * * *"},
+  max_events: {:system, :integer, "MAX_EVENTS", 10_000},
+  events_expiration: {:system, :integer, "EVENTS_EXPIRATION", 30}
+
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
 # by uncommenting the line below and defining dev.exs, test.exs and such.

@@ -49,7 +49,7 @@ script:
   # Run all tests except pending ones
   - ./bin/mix_tests.sh || travis_terminate 1
   # Build Docker container
-  - ./bin/ci/release/build-container.sh || travis_terminate 1
+  - ./bin/ci/rel/build-container.sh || travis_terminate 1
   # Initialize DB for Docker container
   - MIX_ENV=dev mix ecto.setup
   # Run Docker container

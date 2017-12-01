@@ -24,8 +24,7 @@ env:
     # - Chart=event_manager
     - MIX_ENV=test
     - DOCKER_HUB_ACCOUNT=edenlabllc
-    - MAIN_BRANCHES="master develop staging" # Branches on which you want version to be incremented
-    - RELEASE_BRANCH="master"
+    - TRUNK_BRANCH="master"
     # Docker and GitHub credentials
     - secure: "MgGKDY0805n/sq1kIUxaK8T5YG4jucI5JDPIl/UXVwqDqK8kCZMkPCUN2GPDl01cLdqrtCESVLLxY7Z3N7iayVW0SsxlbhZuI0+u6Ld+NOP5v6AheyNhDhowV2dCURItzszddEtKmCDGsR635l5LMb1SL4RFQNyUJtyyth3Z5j/pEV3rYN3ZwgWZByReNzNXypfOCYUmgeYqqR1lRO/I1/1VPTxIaTmn5AT5rI+PEY43c9+PLlPagtpM3WfYB9ATelfwo7QUrfd0eUliJhg2qi4hoZnT3c0Zc2FRRkDKP7/OUCDqL3w7ByCZnbvtPV4Hb6ogK0QqpQ2buOdl7m1sRWKJTvRAWmmIGKtPmbnDt8JIEov70sp0amhsS5PqVVTZu1Q7ZV6wVK9snNpjuDt1wkuwSBQBEokJTUZcs8qeHjomjPjkDJktzwhhWWUmhQf8A+SxGBOgvsr7D1oCjT1NE7VQ7j+wbuK4Kf8sfhlDp8USbEokrdMLQu9ZqbTx5TWbXZxx/wSyfyXJ5UXqz6lSyGMTGcVDhSO2vGS0YJphS+qM26SeILeBxodmfZQf+xZJhrqgo4L7P0yh98v+3bnCGAPPuTmH1+dgrNSdk3eVVjyVLF4ILjnlI+s/g5+F2824sxPsrf/2yam2YJ478vMXBLGYmATifWWli5o9dt9eyuM="
     - secure: "Mj7aK7zMhdrBM/nOXSSjkgLrU1M42Ya88Bp05g+vlawa4/rr4BWZWX/4Hs2VY/+t/HS3psDhqO+3WXhcKSk6yA8k+pfRjuuxmlvIkUbJlXcY8QuLNCz/Ycyq1FdrL9f38hvp1/OZvvwCxMkoIJ41jzTO5++4QMn6+hgQVxWJLFcMc45cNEZxwyTvAWNNZFGqdf7d01gySfjXr2ycow9DV6ZhhhbNV3XtjVcBJvLefYh0B2SucwfcYOy7mw+DtilREKtz3g1+KUVhm6PtFaRZG2qotUWXgcpQxn+iV8DF89G6SrqoKsabkP+gXq4AcyOalaWGPfpk1OeVYabbtzr3eIpMnH8sGVQHB+vpMHP/++K7vJMvZs5E8zKFdUwPQUHULPDqKqFi4qCW3hP7bSVH8pnAOd2VC06uTDcLyHmNVTizvNVyLQB1wk5/NCaKJQHnP3fMRJd4a+/sEBBVF7LyuOki/v0OuxWX0p4BHwHJ7/L7CdUOZDjAXrVOJn+mq5duaCuLDATOzw6VRxzBkNvlyhfL+cpXJgIXhP6KZ3ZRCzEOL8iurOyB/5I0hyuQ7ObUmobY/VL3obUho7fl49JO47vTD8lGgPU9BWooUnavOzXES5sdzopGepO96lT9vy7jad70sSLXikSIw50p7o15ZTImsPRlEr73Qg2RZKKp/wo="

@@ -22,14 +22,6 @@ defmodule EventManagerWeb.EventControllerTest do
       assert hd(resp["data"])["event_time"] == NaiveDateTime.to_iso8601(event.event_time)
     end
 
-    test "success by previous_status filter", %{conn: conn} do
-      event = insert(:event)
-      conn = get conn, event_path(conn, :list_change_status), %{previous_status: "ACTIVE"}
-      assert resp = json_response(conn, 200)
-      assert 1 == length(resp["data"])
-      assert hd(resp["data"])["properties"]["previous_status"] == event.properties["previous_status"]
-    end
-
     test "success by new_status filter", %{conn: conn} do
       event = insert(:event)
       conn = get conn, event_path(conn, :list_change_status), %{new_status: "EXPIRED"}
@@ -42,11 +34,10 @@ defmodule EventManagerWeb.EventControllerTest do
       event = insert(:event)
       insert(:event)
       insert(:event)
-      insert(:event, properties: %{"previous_status" => "ACTIVE", "new_status" => "REJECTED"})
+      insert(:event, properties: %{"new_status" => "REJECTED"})
       conn = get conn, event_path(conn, :list_change_status), %{
         date: to_string(Date.utc_today()),
         new_status: "EXPIRED",
-        previous_status: "ACTIVE",
         page_size: 1,
         page: 2
       }

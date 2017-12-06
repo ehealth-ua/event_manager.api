@@ -11,7 +11,7 @@ defmodule EventManagerWeb.Router do
     pipe_through :api
 
     scope "/events" do
-      get "/StatusChangeEvent", EventController, :list_change_status
+      get "/", EventController, :list
       get "/:id", EventController, :show
     end
   end

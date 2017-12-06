@@ -9,7 +9,7 @@ defmodule EventManagerWeb.EventController do
 
   action_fallback EventManagerWeb.FallbackController
 
-  def list_change_status(conn, params) do
+  def list(conn, params) do
     with %Page{} = paging <- Events.list(params) do
       render(conn, "index.json",
         events: paging.entries,

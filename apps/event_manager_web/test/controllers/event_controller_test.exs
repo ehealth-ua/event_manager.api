@@ -5,18 +5,18 @@ defmodule EventManagerWeb.EventControllerTest do
 
   describe "list change_status events" do
     test "success list no filters", %{conn: conn} do
-      conn = get conn, event_path(conn, :list_change_status)
+      conn = get conn, event_path(conn, :list)
       assert json_response(conn, 200)
     end
 
     test "fail with invalid date", %{conn: conn} do
-      conn = get conn, event_path(conn, :list_change_status), %{date: "invalid"}
+      conn = get conn, event_path(conn, :list), %{date: "invalid"}
       assert json_response(conn, 422)
     end
 
     test "success by date filter", %{conn: conn} do
       event = insert(:event)
-      conn = get conn, event_path(conn, :list_change_status), %{date: to_string(Date.utc_today())}
+      conn = get conn, event_path(conn, :list), %{date: to_string(Date.utc_today())}
       assert resp = json_response(conn, 200)
       assert 1 == length(resp["data"])
       assert hd(resp["data"])["event_time"] == NaiveDateTime.to_iso8601(event.event_time)
@@ -24,7 +24,7 @@ defmodule EventManagerWeb.EventControllerTest do
 
     test "success by new_status filter", %{conn: conn} do
       event = insert(:event)
-      conn = get conn, event_path(conn, :list_change_status), %{attribute_name: "status", new_value: "EXPIRED"}
+      conn = get conn, event_path(conn, :list), %{attribute_name: "status", new_value: "EXPIRED"}
       assert resp = json_response(conn, 200)
       assert 1 == length(resp["data"])
       assert hd(resp["data"])["properties"]["status"]["new_value"] == event.properties["status"]["new_value"]
@@ -32,15 +32,15 @@ defmodule EventManagerWeb.EventControllerTest do
 
     test "success by attribute_name filter", %{conn: conn} do
       event = insert(:event)
-      conn = get conn, event_path(conn, :list_change_status), %{attribute_name: "status"}
+      conn = get conn, event_path(conn, :list), %{attribute_name: "status"}
       assert resp = json_response(conn, 200)
       assert 1 == length(resp["data"])
       assert hd(resp["data"])["properties"]["status"]["new_value"] == event.properties["status"]["new_value"]
     end
 
     test "fail by new_value", %{conn: conn} do
-      event = insert(:event)
-      conn = get conn, event_path(conn, :list_change_status), %{new_value: "EXPIRED"}
+      insert(:event)
+      conn = get conn, event_path(conn, :list), %{new_value: "EXPIRED"}
       assert json_response(conn, 422)
     end
 
@@ -49,7 +49,7 @@ defmodule EventManagerWeb.EventControllerTest do
       insert(:event)
       insert(:event)
       insert(:event, properties: %{"status" => %{"new_value" => "REJECTED"}})
-      conn = get conn, event_path(conn, :list_change_status), %{
+      conn = get conn, event_path(conn, :list), %{
         date: to_string(Date.utc_today()),
         attribute_name: "status",
         new_value: "EXPIRED",

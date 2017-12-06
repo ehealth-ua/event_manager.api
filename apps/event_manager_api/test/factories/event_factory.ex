@@ -11,7 +11,7 @@ defmodule EventManagerApi.EventFactory do
           event_type: Event.type(:change_status),
           entity_type: "MedicationRequest",
           entity_id: generate(),
-          properties: %{"new_status" => "EXPIRED"},
+          properties: %{"status" => %{"new_value" => "EXPIRED"}},
           event_time: NaiveDateTime.utc_now(),
           changed_by: generate(),
         }

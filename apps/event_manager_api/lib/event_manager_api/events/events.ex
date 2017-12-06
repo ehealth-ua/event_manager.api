@@ -12,6 +12,8 @@ defmodule EventManagerApi.Events do
     with %Ecto.Changeset{valid?: true, changes: changes} <- changeset(%Search{}, params) do
       Event
       |> add_date_query(changes)
+      |> add_field_query(:event_type, Map.get(changes, :event_type))
+      |> add_field_query(:entity_type, Map.get(changes, :entity_type))
       |> add_new_value_query(changes)
       |> Repo.paginate(params)
     end
@@ -51,6 +53,8 @@ defmodule EventManagerApi.Events do
       date: :date,
       attribute_name: :string,
       new_value: :string,
+      event_type: :string,
+      entity_type: :string,
     }}
     |> cast(params, search |> Map.from_struct() |> Map.keys())
     |> validate_name_value()
@@ -77,4 +81,9 @@ defmodule EventManagerApi.Events do
     where(query, [e], fragment("?->? IS NOT NULL", e.properties, ^name))
   end
   defp add_new_value_query(query, _), do: query
+
+  defp add_field_query(query, _, nil), do: query
+  defp add_field_query(query, field, value) do
+    where(query, [e], field(e, ^field) == ^value)
+  end
 end

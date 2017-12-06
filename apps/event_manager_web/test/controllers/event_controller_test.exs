@@ -38,6 +38,24 @@ defmodule EventManagerWeb.EventControllerTest do
       assert hd(resp["data"])["properties"]["status"]["new_value"] == event.properties["status"]["new_value"]
     end
 
+    test "success by entity_type", %{conn: conn} do
+      insert(:event, entity_type: "EmployeeRequest")
+      event = insert(:event)
+      conn = get conn, event_path(conn, :list), %{entity_type: "MedicationRequest"}
+      assert resp = json_response(conn, 200)
+      assert 1 == length(resp["data"])
+      assert hd(resp["data"])["entity_type"] == event.entity_type
+    end
+
+    test "success by event_type", %{conn: conn} do
+      insert(:event, event_type: "OtherEventType")
+      event = insert(:event)
+      conn = get conn, event_path(conn, :list), %{event_type: "StatusChangeEvent"}
+      assert resp = json_response(conn, 200)
+      assert 1 == length(resp["data"])
+      assert hd(resp["data"])["event_type"] == event.event_type
+    end
+
     test "fail by new_value", %{conn: conn} do
       insert(:event)
       conn = get conn, event_path(conn, :list), %{new_value: "EXPIRED"}
@@ -53,12 +71,16 @@ defmodule EventManagerWeb.EventControllerTest do
         date: to_string(Date.utc_today()),
         attribute_name: "status",
         new_value: "EXPIRED",
+        entity_type: "MedicationRequest",
+        event_type: "StatusChangeEvent",
         page_size: 1,
         page: 2
       }
       assert resp = json_response(conn, 200)
       assert 1 == length(resp["data"])
       assert hd(resp["data"])["properties"]["status"]["new_value"] == event.properties["status"]["new_value"]
+      assert hd(resp["data"])["event_type"] == event.event_type
+      assert hd(resp["data"])["entity_type"] == event.entity_type
       assert resp["paging"]["total_pages"] == 3
       assert resp["paging"]["page_number"] == 2
     end

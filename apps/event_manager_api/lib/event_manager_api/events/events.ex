@@ -11,9 +11,10 @@ defmodule EventManagerApi.Events do
   def list(params) do
     with %Ecto.Changeset{valid?: true, changes: changes} <- changeset(%Search{}, params) do
       Event
-      |> where([e], e.event_type == ^Event.type(:change_status))
       |> add_date_query(changes)
-      |> add_new_status_query(changes)
+      |> add_field_query(:event_type, Map.get(changes, :event_type))
+      |> add_field_query(:entity_type, Map.get(changes, :entity_type))
+      |> add_new_value_query(changes)
       |> Repo.paginate(params)
     end
   end
@@ -50,18 +51,39 @@ defmodule EventManagerApi.Events do
   defp changeset(%Search{} = search, params) do
     {search, %{
       date: :date,
-      new_status: :string
+      attribute_name: :string,
+      new_value: :string,
+      event_type: :string,
+      entity_type: :string,
     }}
     |> cast(params, search |> Map.from_struct() |> Map.keys())
+    |> validate_name_value()
   end
+
+  defp validate_name_value(%Ecto.Changeset{valid?: true} = changeset) do
+    if !is_nil(get_change(changeset, :new_value)) && is_nil(get_change(changeset, :attribute_name)) do
+      add_error(changeset, :attribute_name, "must be set")
+    else
+      changeset
+    end
+  end
+  defp validate_name_value(changeset), do: changeset
 
   defp add_date_query(query, %{date: date}) do
     where(query, [e], fragment("?::date = ?", e.event_time, ^date))
   end
   defp add_date_query(query, _), do: query
 
-  defp add_new_status_query(query, %{new_status: status}) do
-    where(query, [e], fragment("?->>'new_status' = ?", e.properties, ^status))
+  defp add_new_value_query(query, %{attribute_name: name, new_value: value}) do
+    where(query, [e], fragment("?->?->>'new_value' = ?", e.properties, ^name, ^value))
   end
-  defp add_new_status_query(query, _), do: query
+  defp add_new_value_query(query, %{attribute_name: name}) do
+    where(query, [e], fragment("?->? IS NOT NULL", e.properties, ^name))
+  end
+  defp add_new_value_query(query, _), do: query
+
+  defp add_field_query(query, _, nil), do: query
+  defp add_field_query(query, field, value) do
+    where(query, [e], field(e, ^field) == ^value)
+  end
 end

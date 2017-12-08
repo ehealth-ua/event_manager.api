@@ -2,6 +2,7 @@ defmodule EventManagerWeb.EventControllerTest do
   @moduledoc false
 
   use EventManagerWeb.ConnCase, async: false
+  alias Ecto.UUID
 
   describe "list change_status events" do
     test "success list no filters", %{conn: conn} do
@@ -96,7 +97,7 @@ defmodule EventManagerWeb.EventControllerTest do
 
     test "fail get by id", %{conn: conn} do
       assert_raise Ecto.NoResultsError, fn ->
-        get conn, event_path(conn, :show, "1")
+        get conn, event_path(conn, :show, UUID.generate())
       end
 
       conn = get conn, event_path(conn, :show, "invalid")

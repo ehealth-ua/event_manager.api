@@ -7,6 +7,7 @@ defmodule EventManagerApi.Events.Event do
 
   def type(:change_status), do: @type_change_status
 
+  @primary_key {:id, :binary_id, autogenerate: true}
   schema "events" do
     field :event_type, :string
     field :entity_type, :string

@@ -6,7 +6,7 @@ defmodule EventManagerApi.Events do
   alias EventManagerApi.Repo
   alias EventManagerApi.Events.Event
   alias EventManagerApi.Events.Search
-  alias Ecto.Type
+  alias Ecto.UUID
 
   def list(params) do
     with %Ecto.Changeset{valid?: true, changes: changes} <- changeset(%Search{}, params) do
@@ -20,7 +20,7 @@ defmodule EventManagerApi.Events do
   end
 
   def get_by_id!(id) do
-    with {:ok, _} <- Type.cast(:id, id) do
+    with {:ok, _} <- UUID.dump(id) do
       Repo.get!(Event, id)
     else
       _ -> nil
@@ -30,15 +30,15 @@ defmodule EventManagerApi.Events do
   def delete_events(max_events, expiration) do
     event =
       Event
-      |> order_by([e], desc: e.id)
+      |> order_by([e], desc: e.inserted_at)
       |> offset(^max_events)
       |> limit(1)
       |> Repo.one
 
     unless is_nil(event) do
-      event_id = event.id
+      inserted_at = event.inserted_at
       Event
-      |> where([e], e.id <= ^event_id)
+      |> where([e], e.inserted_at <= ^inserted_at)
       |> Repo.delete_all
     end
 

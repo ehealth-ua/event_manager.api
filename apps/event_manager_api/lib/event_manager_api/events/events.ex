@@ -50,7 +50,7 @@ defmodule EventManagerApi.Events do
 
   defp changeset(%Search{} = search, params) do
     {search, %{
-      date: :date,
+      date: :naive_datetime,
       attribute_name: :string,
       new_value: :string,
       event_type: :string,
@@ -70,7 +70,7 @@ defmodule EventManagerApi.Events do
   defp validate_name_value(changeset), do: changeset
 
   defp add_date_query(query, %{date: date}) do
-    where(query, [e], fragment("?::date = ?", e.event_time, ^date))
+    where(query, [e], fragment("? >= ?", e.event_time, ^date))
   end
   defp add_date_query(query, _), do: query
 

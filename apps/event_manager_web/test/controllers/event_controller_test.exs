@@ -16,8 +16,9 @@ defmodule EventManagerWeb.EventControllerTest do
     end
 
     test "success by date filter", %{conn: conn} do
+      date = NaiveDateTime.utc_now()
       event = insert(:event)
-      conn = get conn, event_path(conn, :list), %{date: to_string(Date.utc_today())}
+      conn = get conn, event_path(conn, :list), %{date: to_string(date)}
       assert resp = json_response(conn, 200)
       assert 1 == length(resp["data"])
       assert hd(resp["data"])["event_time"] == NaiveDateTime.to_iso8601(event.event_time)
@@ -69,7 +70,7 @@ defmodule EventManagerWeb.EventControllerTest do
       insert(:event)
       insert(:event, properties: %{"status" => %{"new_value" => "REJECTED"}})
       conn = get conn, event_path(conn, :list), %{
-        date: to_string(Date.utc_today()),
+        date: "2017-12-20T15:00:00",
         attribute_name: "status",
         new_value: "EXPIRED",
         entity_type: "MedicationRequest",

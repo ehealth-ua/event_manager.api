@@ -1,0 +1,8 @@
+{
+  "skip_files": [
+    "test/*",
+    "lib/tasks/tasks.ex",
+    "lib/event_manager_api/search.ex",
+    "lib/repo.ex"
+  ]
+}

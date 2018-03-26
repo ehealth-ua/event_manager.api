@@ -54,8 +54,7 @@ defmodule EventManagerApi.EventsTest do
     insert(:event, %{event_time: NaiveDateTime.add(moment, 2)})
 
     entries =
-      %{}
-      |> Map.put("date", moment)
+      %{"date" => moment}
       |> Events.list()
       |> Map.from_struct()
       |> Map.get(:entries)
@@ -70,9 +69,7 @@ defmodule EventManagerApi.EventsTest do
     event_in = insert(:event)
 
     entries =
-      %{}
-      |> Map.put("attribute_name", "status")
-      |> Map.put("new_value", "EXPIRED")
+      %{"attribute_name" => "status", "new_value" => "EXPIRED"}
       |> Events.list()
       |> Map.from_struct()
       |> Map.get(:entries)
@@ -86,8 +83,7 @@ defmodule EventManagerApi.EventsTest do
     event_in = insert(:event)
 
     entries =
-      %{}
-      |> Map.put("attribute_name", "status")
+      %{"attribute_name" => "status"}
       |> Events.list()
       |> Map.from_struct()
       |> Map.get(:entries)
@@ -113,8 +109,7 @@ defmodule EventManagerApi.EventsTest do
     event_out = insert(:event, %{entity_type: "TestRequest"})
 
     entries =
-      %{}
-      |> Map.put("entity_type", "MedicationRequest")
+      %{"entity_type" => "MedicationRequest"}
       |> Events.list()
       |> Map.from_struct()
       |> Map.get(:entries)

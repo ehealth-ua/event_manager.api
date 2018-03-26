@@ -3,6 +3,7 @@
     "test/*",
     "lib/tasks/tasks.ex",
     "lib/event_manager_api/events/search.ex",
+    "lib/event_manager_api/scheduler.ex",
     "lib/repo.ex"
   ]
 }

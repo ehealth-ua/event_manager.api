@@ -41,7 +41,6 @@ defmodule EventManagerApi.EventsTest do
     entries_count =
       %{}
       |> Events.list()
-      |> Map.from_struct()
       |> Map.get(:total_entries)
 
     assert entries_count == 2
@@ -56,7 +55,6 @@ defmodule EventManagerApi.EventsTest do
     entries =
       %{"date" => moment}
       |> Events.list()
-      |> Map.from_struct()
       |> Map.get(:entries)
 
     assert length(entries) == 2
@@ -71,7 +69,6 @@ defmodule EventManagerApi.EventsTest do
     entries =
       %{"attribute_name" => "status", "new_value" => "EXPIRED"}
       |> Events.list()
-      |> Map.from_struct()
       |> Map.get(:entries)
 
     refute event_out in entries
@@ -85,7 +82,6 @@ defmodule EventManagerApi.EventsTest do
     entries =
       %{"attribute_name" => "status"}
       |> Events.list()
-      |> Map.from_struct()
       |> Map.get(:entries)
 
     refute event_out in entries
@@ -111,7 +107,6 @@ defmodule EventManagerApi.EventsTest do
     entries =
       %{"entity_type" => "MedicationRequest"}
       |> Events.list()
-      |> Map.from_struct()
       |> Map.get(:entries)
 
     refute event_out in entries

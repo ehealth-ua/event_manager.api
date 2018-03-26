@@ -4,21 +4,23 @@ defmodule EventManagerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :event_manager_web
   alias Confex.Resolver
 
-  plug Plug.RequestId
-  plug EView.Plugs.Idempotency
-  plug Plug.LoggerJSON, level: Logger.level
+  plug(Plug.RequestId)
+  plug(EView.Plugs.Idempotency)
+  plug(Plug.LoggerJSON, level: Logger.level())
 
-  plug EView
+  plug(EView)
 
-  plug Plug.Parsers,
+  plug(
+    Plug.Parsers,
     parsers: [:json],
     pass: ["*/*"],
     json_decoder: Poison
+  )
 
-  plug Plug.MethodOverride
-  plug Plug.Head
+  plug(Plug.MethodOverride)
+  plug(Plug.Head)
 
-  plug EventManagerWeb.Router
+  plug(EventManagerWeb.Router)
 
   @doc """
   Dynamically loads configuration from the system environment

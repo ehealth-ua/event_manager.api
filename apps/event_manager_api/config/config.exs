@@ -21,8 +21,7 @@ use Mix.Config
 #     config :logger, level: :info
 
 config :event_manager_api, ecto_repos: [EventManagerApi.Repo]
-config :ecto_trail,
-  table_name: "audit_log"
+config :ecto_trail, table_name: "audit_log"
 
 config :event_manager_api, EventManagerApi.Scheduler,
   events_termination: {:system, :string, "EVENTS_TERMINATION_SCHEDULE", "* 0-4 * * *"},
@@ -35,4 +34,4 @@ config :event_manager_api, EventManagerApi.Scheduler,
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

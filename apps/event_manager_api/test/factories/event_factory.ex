@@ -13,7 +13,7 @@ defmodule EventManagerApi.EventFactory do
           entity_id: generate(),
           properties: %{"status" => %{"new_value" => "EXPIRED"}},
           event_time: NaiveDateTime.utc_now(),
-          changed_by: generate(),
+          changed_by: generate()
         }
       end
     end

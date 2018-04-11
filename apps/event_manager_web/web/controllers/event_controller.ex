@@ -7,11 +7,13 @@ defmodule EventManagerWeb.EventController do
   alias EventManagerApi.Events.Event
   alias Scrivener.Page
 
-  action_fallback EventManagerWeb.FallbackController
+  action_fallback(EventManagerWeb.FallbackController)
 
   def list(conn, params) do
     with %Page{} = paging <- Events.list(params) do
-      render(conn, "index.json",
+      render(
+        conn,
+        "index.json",
         events: paging.entries,
         paging: paging
       )

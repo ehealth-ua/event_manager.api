@@ -13,9 +13,9 @@ defmodule EventManagerWeb.Mixfile do
       lockfile: "../../mix.lock",
       elixir: "~> 1.5",
       test_coverage: [tool: ExCoveralls],
-      elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix] ++ Mix.compilers,
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
   end
@@ -32,7 +32,7 @@ defmodule EventManagerWeb.Mixfile do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
-  defp elixirc_paths(_),     do: ["lib", "web"]
+  defp elixirc_paths(_), do: ["lib", "web"]
 
   # Specifies your project dependencies.
   #
@@ -45,7 +45,7 @@ defmodule EventManagerWeb.Mixfile do
       {:eview, "~> 0.12.2"},
       {:cowboy, "~> 1.1"},
       {:plug_logger_json, "~> 0.5"},
-      {:event_manager_api, in_umbrella: true},
+      {:event_manager_api, in_umbrella: true}
     ]
   end
 end

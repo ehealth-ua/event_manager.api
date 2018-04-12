@@ -23,7 +23,10 @@ config :event_manager_web, EventManagerWeb.Endpoint,
   code_reloader: false
 
 # Do not print debug messages in production
-config :logger, level: :error, handle_otp_reports: true
+config :logger,
+  format: "$message\n",
+  level: :info,
+  handle_otp_reports: true
 
 # ## SSL Support
 #

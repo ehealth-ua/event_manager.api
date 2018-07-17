@@ -21,6 +21,7 @@ notifications:
     on_success: always
 env:
   global:
+    - DOCKER_NAMESPACE=edenlabllc
     - MIX_ENV=test
     - APPS='{"event_manager_web":"em"}'
     - POSTGRES_VERSION=9.6

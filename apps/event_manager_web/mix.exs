@@ -16,7 +16,8 @@ defmodule EventManagerWeb.Mixfile do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      aliases: aliases()
     ]
   end
 
@@ -47,5 +48,15 @@ defmodule EventManagerWeb.Mixfile do
       {:plug_logger_json, "~> 0.5"},
       {:event_manager_api, in_umbrella: true}
     ]
+  end
+
+  defp aliases do
+    [
+      "ecto.setup": &ecto_setup/1
+    ]
+  end
+
+  defp ecto_setup(_) do
+    Mix.shell().cmd("cd ../event_manager_api && mix ecto.setup")
   end
 end

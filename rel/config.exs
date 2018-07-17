@@ -38,7 +38,7 @@ end
 # will be used by default
 
 release :event_manager_web do
-  set version: current_version(:event_manager_web)
+  set version: "0.1.0"
   set applications: [
     :runtime_tools,
     :event_manager_web,

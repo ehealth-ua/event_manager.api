@@ -21,9 +21,8 @@ notifications:
     on_success: always
 env:
   global:
-    - Chart=em
     - MIX_ENV=test
-    - APPS='{"event_manager_web":"event_manager_web"}'
+    - APPS='{"event_manager_web":"em"}'
     - POSTGRES_VERSION=9.6
     # DOCKER_USERNAME , DOCKER_PASSWORD
     - secure: "MgGKDY0805n/sq1kIUxaK8T5YG4jucI5JDPIl/UXVwqDqK8kCZMkPCUN2GPDl01cLdqrtCESVLLxY7Z3N7iayVW0SsxlbhZuI0+u6Ld+NOP5v6AheyNhDhowV2dCURItzszddEtKmCDGsR635l5LMb1SL4RFQNyUJtyyth3Z5j/pEV3rYN3ZwgWZByReNzNXypfOCYUmgeYqqR1lRO/I1/1VPTxIaTmn5AT5rI+PEY43c9+PLlPagtpM3WfYB9ATelfwo7QUrfd0eUliJhg2qi4hoZnT3c0Zc2FRRkDKP7/OUCDqL3w7ByCZnbvtPV4Hb6ogK0QqpQ2buOdl7m1sRWKJTvRAWmmIGKtPmbnDt8JIEov70sp0amhsS5PqVVTZu1Q7ZV6wVK9snNpjuDt1wkuwSBQBEokJTUZcs8qeHjomjPjkDJktzwhhWWUmhQf8A+SxGBOgvsr7D1oCjT1NE7VQ7j+wbuK4Kf8sfhlDp8USbEokrdMLQu9ZqbTx5TWbXZxx/wSyfyXJ5UXqz6lSyGMTGcVDhSO2vGS0YJphS+qM26SeILeBxodmfZQf+xZJhrqgo4L7P0yh98v+3bnCGAPPuTmH1+dgrNSdk3eVVjyVLF4ILjnlI+s/g5+F2824sxPsrf/2yam2YJ478vMXBLGYmATifWWli5o9dt9eyuM="

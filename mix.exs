@@ -17,9 +17,9 @@ defmodule EventManager.MixProject do
   # Run "mix help deps" for examples and options.
   defp deps do
     [
-      {:distillery, "~> 1.5", runtime: false},
-      {:excoveralls, "~> 0.7.5", only: [:dev, :test]},
-      {:credo, "~> 0.8.10", only: [:dev, :test]}
+      {:distillery, "~> 1.5.3", runtime: false},
+      {:excoveralls, "~> 0.8.1", only: [:dev, :test]},
+      {:credo, "~> 0.9.3", only: [:dev, :test]}
     ]
   end
 end

@@ -11,7 +11,7 @@ defmodule EventManagerWeb.Mixfile do
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "~> 1.5",
+      elixir: "~> 1.6",
       test_coverage: [tool: ExCoveralls],
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
@@ -41,7 +41,7 @@ defmodule EventManagerWeb.Mixfile do
   defp deps do
     [
       {:confex, "~> 3.2"},
-      {:phoenix, "~> 1.3.0"},
+      {:phoenix, "~> 1.3.3"},
       {:phoenix_ecto, "~> 3.2"},
       {:eview, "~> 0.12.2"},
       {:cowboy, "~> 1.1"},

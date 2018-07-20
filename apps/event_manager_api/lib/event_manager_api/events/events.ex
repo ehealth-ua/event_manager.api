@@ -3,10 +3,10 @@ defmodule EventManagerApi.Events do
 
   import Ecto.Changeset
   import Ecto.Query
-  alias EventManagerApi.Repo
+  alias Ecto.UUID
   alias EventManagerApi.Events.Event
   alias EventManagerApi.Events.Search
-  alias Ecto.UUID
+  alias EventManagerApi.Repo
 
   def list(params) do
     with %Ecto.Changeset{valid?: true, changes: changes} <- changeset(%Search{}, params) do

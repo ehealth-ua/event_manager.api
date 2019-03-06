@@ -1,4 +1,4 @@
-FROM elixir:1.6.6-alpine as builder
+FROM elixir:1.8.1-alpine as builder
 
 ARG APP_NAME
 ARG APP_VERSION
@@ -9,16 +9,16 @@ WORKDIR /app
 
 ENV MIX_ENV=prod
 
-RUN apk add --no-cache erlang-xmerl git
+RUN apk add --no-cache erlang-xmerl git build-base
 
 RUN mix do \
     local.hex --force, \
     local.rebar --force, \
     deps.get, \
     deps.compile, \
-    release
+    release --name=${APP_NAME}
 
-FROM alpine:3.7
+FROM alpine:3.9
 
 ARG APP_NAME
 ARG APP_VERSION

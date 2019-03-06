@@ -11,9 +11,9 @@ addons:
     packages:
       - docker-ce
 elixir:
-  - 1.6.6
+  - 1.8.1
 otp_release:
-  - 20.3.8
+  - 21.2.5
 notifications:
   slack:
     rooms:
@@ -23,7 +23,6 @@ env:
   global:
     - DOCKER_NAMESPACE=edenlabllc
     - MIX_ENV=test
-    - APPS='{"event_manager_web":"em"}'
     - POSTGRES_VERSION=9.6
     # DOCKER_USERNAME , DOCKER_PASSWORD
     - secure: "MgGKDY0805n/sq1kIUxaK8T5YG4jucI5JDPIl/UXVwqDqK8kCZMkPCUN2GPDl01cLdqrtCESVLLxY7Z3N7iayVW0SsxlbhZuI0+u6Ld+NOP5v6AheyNhDhowV2dCURItzszddEtKmCDGsR635l5LMb1SL4RFQNyUJtyyth3Z5j/pEV3rYN3ZwgWZByReNzNXypfOCYUmgeYqqR1lRO/I1/1VPTxIaTmn5AT5rI+PEY43c9+PLlPagtpM3WfYB9ATelfwo7QUrfd0eUliJhg2qi4hoZnT3c0Zc2FRRkDKP7/OUCDqL3w7ByCZnbvtPV4Hb6ogK0QqpQ2buOdl7m1sRWKJTvRAWmmIGKtPmbnDt8JIEov70sp0amhsS5PqVVTZu1Q7ZV6wVK9snNpjuDt1wkuwSBQBEokJTUZcs8qeHjomjPjkDJktzwhhWWUmhQf8A+SxGBOgvsr7D1oCjT1NE7VQ7j+wbuK4Kf8sfhlDp8USbEokrdMLQu9ZqbTx5TWbXZxx/wSyfyXJ5UXqz6lSyGMTGcVDhSO2vGS0YJphS+qM26SeILeBxodmfZQf+xZJhrqgo4L7P0yh98v+3bnCGAPPuTmH1+dgrNSdk3eVVjyVLF4ILjnlI+s/g5+F2824sxPsrf/2yam2YJ478vMXBLGYmATifWWli5o9dt9eyuM="
@@ -37,12 +36,24 @@ before_install:
 - curl -s https://raw.githubusercontent.com/edenlabllc/ci-utils/umbrella/init-db.sh -o init-db.sh; sudo sh ./init-db.sh
 jobs:
   include:
+    # run tests
     - stage: "test and build"
-      # run tests
+    - name: "Run tests"
       script: (curl -s https://raw.githubusercontent.com/edenlabllc/ci-utils/umbrella/tests.sh -o tests.sh; bash ./tests.sh) || travis_terminate 1
-      # Build Docker container
+
+    # Build Docker container event_manager
     - stage: "test and build"
-      # "Decrypting deploy key..."
+      name: "Build Docker container for event_manager"
+      env:
+      - APPS='[{"app":"event_manager","chart":"em","namespace":"em","deployment":"api","label":"api"}]'
       script:
       - openssl aes-256-cbc -K $encrypted_06c0e24cd1a8_key -iv $encrypted_06c0e24cd1a8_iv -in eHealth-8110bd102a69.json.enc -out eHealth-8110bd102a69.json -d
-      - (curl -s https://raw.githubusercontent.com/edenlabllc/ci-utils/umbrella/docker.sh -o docker.sh; bash ./docker.sh) || travis_terminate 1
+      - (curl -s https://raw.githubusercontent.com/edenlabllc/ci-utils/umbrella_v2/docker.sh -o docker.sh; bash ./docker.sh) || travis_terminate 1
+    # Build Docker container event_manager_consumer
+    - stage: "test and build"
+      name: "Build Docker container for event_manager_consumer"
+      env:
+      - APPS='[{"app":"event_manager_consumer","chart":"em","namespace":"em","deployment":"api","label":"event-manager-consumer"}]'
+      script:
+      - openssl aes-256-cbc -K $encrypted_06c0e24cd1a8_key -iv $encrypted_06c0e24cd1a8_iv -in eHealth-8110bd102a69.json.enc -out eHealth-8110bd102a69.json -d
+      - (curl -s https://raw.githubusercontent.com/edenlabllc/ci-utils/umbrella_v2/docker.sh -o docker.sh; bash ./docker.sh) || travis_terminate 1

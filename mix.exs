@@ -1,8 +1,10 @@
-defmodule EventManager.MixProject do
+defmodule EventManagerAPI.MixProject do
   use Mix.Project
 
+  @version "0.10.0"
   def project do
     [
+      version: @version,
       apps_path: "apps",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -17,7 +19,8 @@ defmodule EventManager.MixProject do
   # Run "mix help deps" for examples and options.
   defp deps do
     [
-      {:distillery, "~> 1.5.3", runtime: false},
+      {:git_ops, "~> 0.6.0", only: [:dev]},
+      {:distillery, "~> 2.0.12", runtime: false},
       {:excoveralls, "~> 0.8.1", only: [:dev, :test]},
       {:credo, "~> 0.9.3", only: [:dev, :test]}
     ]

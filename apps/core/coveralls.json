@@ -1,0 +1,9 @@
+{
+  "skip_files": [
+    "test/*",
+    "lib/tasks/tasks.ex",
+    "lib/core/events/search.ex",
+    "lib/core/scheduler.ex",
+    "lib/repo.ex"
+  ]
+}

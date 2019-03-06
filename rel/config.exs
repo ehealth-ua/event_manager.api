@@ -8,14 +8,13 @@
 |> Enum.map(&Code.eval_file(&1))
 
 use Mix.Releases.Config,
-    # This sets the default release built by `mix release`
-    default_release: :default,
-    # This sets the default environment used by `mix release`
-    default_environment: :default
+  # This sets the default release built by `mix release`
+  default_release: :default,
+  # This sets the default environment used by `mix release`
+  default_environment: :default
 
 # For a full list of config options for both releases
 # and environments, visit https://hexdocs.pm/distillery/configuration.html
-
 
 # You may define one or more environments in this file,
 # an environment's settings will override those of a release
@@ -23,13 +22,16 @@ use Mix.Releases.Config,
 # and environment configuration is called a profile
 
 environment :default do
-  set pre_start_hook: "bin/hooks/pre-start.sh"
-  set dev_mode: false
-  set include_erts: true
-  set include_src: false
-  set overlays: [
-    {:template, "rel/templates/vm.args.eex", "releases/<%= release_version %>/vm.args"}
-  ]
+  set(pre_start_hooks: "bin/hooks/")
+  set(dev_mode: false)
+  set(include_erts: true)
+  set(include_src: false)
+
+  set(
+    overlays: [
+      {:template, "rel/templates/vm.args.eex", "releases/<%= release_version %>/vm.args"}
+    ]
+  )
 end
 
 # You may define one or more releases in this file.
@@ -37,10 +39,28 @@ end
 # when running `mix release`, the first release in the file
 # will be used by default
 
-release :event_manager_web do
-  set version: "0.1.0"
-  set applications: [
-    :runtime_tools,
-    :event_manager_web,
-  ]
+release :event_manager do
+  set(version: "0.1.0")
+
+  set(
+    applications: [
+      :runtime_tools,
+      :event_manager
+    ]
+  )
+
+  set(config_providers: [ConfexConfigProvider])
+end
+
+release :event_manager_consumer do
+  set(version: "0.1.0")
+
+  set(
+    applications: [
+      :runtime_tools,
+      :event_manager_consumer
+    ]
+  )
+
+  set(config_providers: [ConfexConfigProvider])
 end

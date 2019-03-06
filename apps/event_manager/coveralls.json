@@ -1,0 +1,8 @@
+{
+  "skip_files": [
+    "test/*",
+    "lib/event_manager.ex",
+    "lib/event_manager/endpoint.ex",
+    "web/web.ex"
+  ]
+}

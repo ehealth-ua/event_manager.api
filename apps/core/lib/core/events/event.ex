@@ -13,7 +13,7 @@ defmodule Core.Events.Event do
     field(:entity_type, :string)
     field(:entity_id, Ecto.UUID)
     field(:properties, :map)
-    field(:event_time, :naive_datetime)
+    field(:event_time, :utc_datetime)
     field(:changed_by, Ecto.UUID)
 
     timestamps(type: :utc_datetime)

@@ -21,7 +21,7 @@ defmodule EventManager.EventControllerTest do
       conn = get(conn, event_path(conn, :list), %{date: to_string(date)})
       assert resp = json_response(conn, 200)
       assert 1 == length(resp["data"])
-      assert hd(resp["data"])["event_time"] == NaiveDateTime.to_iso8601(event.event_time)
+      assert hd(resp["data"])["event_time"] == DateTime.to_iso8601(event.event_time)
     end
 
     test "success by new_status filter", %{conn: conn} do

@@ -16,7 +16,7 @@ defmodule Core.Events.Event do
     field(:event_time, :naive_datetime)
     field(:changed_by, Ecto.UUID)
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @fields ~w(event_type entity_type entity_id properties event_time changed_by)a

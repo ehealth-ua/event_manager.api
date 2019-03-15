@@ -36,14 +36,13 @@ defmodule Core.MixProject do
   defp deps do
     [
       {:confex_config_provider, "~> 0.1.0"},
-      {:confex, "~> 3.2"},
+      {:confex, "~> 3.4"},
       {:postgrex, "~> 0.14.1"},
       {:ecto_sql, "~> 3.0.5"},
       {:scrivener_ecto, git: "https://github.com/AlexKovalevych/scrivener_ecto.git", branch: "fix_page_number"},
       {:ehealth_logger, git: "https://github.com/edenlabllc/ehealth_logger.git"},
-      {:ecto_trail, "~> 0.4.0"},
-      {:ecto_logger_json, "~> 0.1"},
-      {:quantum, "~> 2.2"},
+      {:ecto_trail, "~> 0.4.1"},
+      {:quantum, "~> 2.3"},
       {:ex_machina, "~> 2.2", only: :test}
     ]
   end

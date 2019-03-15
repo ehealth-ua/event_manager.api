@@ -22,7 +22,7 @@ defmodule EventManagerAPI.MixProject do
       {:git_ops, "~> 0.6.0", only: [:dev]},
       {:distillery, "~> 2.0.12", runtime: false},
       {:excoveralls, "~> 0.8.1", only: [:dev, :test]},
-      {:credo, "~> 0.9.3", only: [:dev, :test]}
+      {:credo, "~> 1.0", only: [:dev, :test]}
     ]
   end
 end

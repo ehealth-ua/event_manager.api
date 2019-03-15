@@ -27,16 +27,7 @@ defmodule EventManager.FallbackController do
   end
 
   def call(conn, params) do
-    Logger.error(fn ->
-      Poison.encode!(%{
-        "log_type" => "error",
-        "message" =>
-          "No function clause matching in EHealth.Web.FallbackController.call/2: #{
-            inspect(params)
-          }",
-        "request_id" => Logger.metadata()[:request_id]
-      })
-    end)
+    Logger.error("No function clause matching in EHealth.Web.FallbackController.call/2: #{inspect(params)}")
 
     conn
     |> put_status(:not_implemented)

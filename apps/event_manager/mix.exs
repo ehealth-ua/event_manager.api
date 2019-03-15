@@ -43,8 +43,7 @@ defmodule EventManager.MixProject do
       {:eview, "~> 0.15.0"},
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
-      {:jason, "~> 1.0"},
-      {:plug_logger_json, "~> 0.5"},
+      {:jason, "~> 1.1"},
       {:core, in_umbrella: true}
     ]
   end

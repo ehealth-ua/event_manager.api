@@ -3,8 +3,8 @@ def author() {
 }
 pipeline {
   agent {
-    node { 
-      label 'ehealth-build-big' 
+    node {
+      label 'ehealth-build-big'
       }
   }
   environment {
@@ -29,6 +29,7 @@ pipeline {
         sh 'sudo docker system prune -f'
         sh '''
           sudo docker run -d --name postgres -p 5432:5432 edenlabllc/alpine-postgre:pglogical-gis-1.1;
+          sudo docker run -d --name kafkazookeeper -p 2181:2181 -p 9092:9092 edenlabllc/kafka-zookeeper:2.1.0;
           sudo docker ps;
         '''
         sh '''
@@ -38,6 +39,12 @@ pipeline {
             done
           psql -U postgres -h localhost -c "create database event_manager";
           psql -U postgres -h localhost -c "create database event_manager_dev";
+        '''
+        sh '''
+          until sudo docker exec -i kafkazookeeper /opt/kafka_2.12-2.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic event_manager_topic;
+            do
+              sleep 2
+            done
         '''
         sh '''
           mix local.hex --force;
@@ -71,7 +78,7 @@ pipeline {
             sh '''
               curl -s https://raw.githubusercontent.com/edenlabllc/ci-utils/umbrella_jenkins_gce/build-container.sh -o build-container.sh;
               chmod +x ./build-container.sh;
-              ./build-container.sh;  
+              ./build-container.sh;
             '''
           }
         }
@@ -86,10 +93,10 @@ pipeline {
             sh '''
               curl -s https://raw.githubusercontent.com/edenlabllc/ci-utils/umbrella_jenkins_gce/build-container.sh -o build-container.sh;
               chmod +x ./build-container.sh;
-              ./build-container.sh;  
+              ./build-container.sh;
             '''
           }
-        }        
+        }
       }
     }
     stage('Run event-manager-app and push') {
@@ -102,7 +109,7 @@ pipeline {
       steps {
         sh '''
           curl -s https://raw.githubusercontent.com/edenlabllc/ci-utils/umbrella_jenkins_gce/start-container.sh -o start-container.sh;
-          chmod +x ./start-container.sh; 
+          chmod +x ./start-container.sh;
           ./start-container.sh;
         '''
         withCredentials(bindings: [usernamePassword(credentialsId: '8232c368-d5f5-4062-b1e0-20ec13b0d47b', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
@@ -125,7 +132,7 @@ pipeline {
       steps {
         sh '''
           curl -s https://raw.githubusercontent.com/edenlabllc/ci-utils/umbrella_jenkins_gce/start-container.sh -o start-container.sh;
-          chmod +x ./start-container.sh; 
+          chmod +x ./start-container.sh;
           ./start-container.sh;
         '''
         withCredentials(bindings: [usernamePassword(credentialsId: '8232c368-d5f5-4062-b1e0-20ec13b0d47b', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
@@ -158,7 +165,7 @@ pipeline {
         }
       }
     }
-  }  
+  }
   post {
     success {
       script {
